@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #006400;
+}
+
+#tigers,
+#pair-tie {
+    display: flex;
+}
+
+.side-bet {
+    border: #111 solid 2px;
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 15px 25px 40px 25px;
+    margin: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.side-bet.active {
+    background: #e48400;
+}
+
+.layout {
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.layout h3 {
+    font-size: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+    min-width: 400px;
+}
+
+.hand {
+    display: flex;
+    width: 100px;
+    align-self: flex-start;
+    min-height: 150px;
+}
+
+#banker-cards {
+    align-self: center;
+}
+
+.hand img {
+    max-width: 100%;
+    height: auto;
+    margin: 5px;
+}
+
+.total {
+    margin-top: 10px;
+    font-size: 40px;
+    min-height: 50px;
+}
+
+#winner {
+    font-size: 35px;
+    min-height: 35px;
+}
+
+#play-game, 
+#submit-btn {
+    display: none;
+}
+
+#play-game.active, 
+#submit-btn.active{
+    display: inline-block;
+}
+
+.btn { 
+    background: #b5651d;
+    color: #fff;
+    margin-top: 40px;
+    padding: 10px 20px;
+    font-size: 25px;
+    border-radius: 7px;
+    border: #222 solid 1px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #894c16;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+#alert-box {
+    display: none;
+}
+
+#alert-box.active {
+    display: inline-block;
+    border: #222 2px solid;
+    background: #001f3f;
+    color: #fff;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
+}
+
+#alert-message {
+    font-size: 35px;
+}
+
+@media(max-width: 768px) {
+
+    .layout {
+        width: 100vw;
+    }
+
+    .hand {
+        width: 100px;
+        min-height: 105;
+    }
+
+    .hand img {
+        height: 105;
+    }
+
+    .side {
+        width: 100%;
+        align-self: center;
+    }
+
+    #play-game {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 25px;
+    }
+}
+

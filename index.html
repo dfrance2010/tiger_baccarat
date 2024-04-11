@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e69b047051.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Tiger Bet</title>
+</head>
+<body>
+    <h1>Tiger Baccarat</h1>
+    <div id="tigers">
+        <div id="big-tiger" class="side-bet active">Big Tiger</div>
+        <div id="tiger" class="side-bet active">Tiger</div>
+        <div id="small-tiger" class="side-bet active">Small Tiger</div>
+    </div>
+    <div id="pair-tie">
+        <div id="tie" class="side-bet active">Tie</div>
+        <div id="pair" class="side-bet active">Tiger Pair</div>
+    </div>
+    <div id="alert-box">
+        <div id="alert-message"></div>
+        <button id="alert-btn" class="btn">Continue</button>
+    </div>
+    <div class="layout">
+        <div class="side" >
+            <h3>Banker</h3>
+            <div id="banker-cards" class="hand"></div>
+            <div id="banker-total" class="total"></div>
+        </div>
+        <div id="player" class="side" >
+            <h3>Player</h3>
+            <div id="player-cards" class="hand"></div>
+            <div id="player-total" class="total"></div>
+        </div>
+    </div>
+    
+    <div id="winner"></div>
+
+    <button id="play-game" class="btn active">Play Game</button>
+    <button id="submit-btn" class="btn">Submit Answer</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
