@@ -43,7 +43,7 @@ let endWait = WAIT_1;
 
 playBtn.addEventListener('click', dealHand);
 submitBtn.addEventListener('click', checkAnswer);
-alertBtn.addEventListener('click', resetHand);
+alertBtn.addEventListener('click', dealHand);
 
 // Side bet listeners
 sideBets.forEach(bet => bet.addEventListener('click', () => bet.classList.toggle('active')));
@@ -300,7 +300,6 @@ function checkAnswer() {
   }
   alertBox.classList.add('active');
   submitBtn.classList.remove('active');
-  playBtn.classList.add('active');
 }
 
 // Calculate integer value from returned JSON value
