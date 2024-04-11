@@ -137,9 +137,9 @@ h1 {
 #alert-box.active {
     display: inline-block;
     border: #222 2px solid;
-    background: #001f3f;
+    background: #37474f;
     color: #fff;
-    padding: 20px 60px;
+    padding: 20px 60px 10px 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
