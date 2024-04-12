@@ -10,19 +10,37 @@
 <body>
     <h1>Tiger Baccarat</h1>
     <div id="tigers">
-        <div id="big-tiger" class="side-bet active">Big Tiger</div>
+        <div id="big_tiger" class="side-bet active">Big Tiger</div>
         <div id="tiger" class="side-bet active">Tiger</div>
-        <div id="small-tiger" class="side-bet active">Small Tiger</div>
+        <div id="small_tiger" class="side-bet active">Small Tiger</div>
     </div>
     <div id="pair-tie">
         <div id="tie" class="side-bet active">Tie</div>
         <div id="pair" class="side-bet active">Tiger Pair</div>
     </div>
 
-    <div id="alert-box">
-        <div id="alert-message"></div>
-        <button id="alert-btn" class="btn">Play Again</button>
+    <div id="game-btns" class="active">
+        <button id="play-game" class="btn active">Play Game</button>
+        <button id="submit-btn" class="btn">Submit Answer</button>
     </div>
+
+    <div id="alert-box" class="action-box">
+        <div id="alert-message"></div>
+        <button id="play-again-btn" class="btn">Play Again</button>
+        <button id="pay-bets-btn" class="btn">Pay Winners</button>
+    </div>
+
+    <div id="payout-box" class="action-box">
+        <div id="title">Paying:</div>
+        <div id="bet-to-pay"></div>
+        <ul id="denoms"></ul>
+        <input type="number" name="input1" class="payout" placeholder="$">
+        <input type="number"  name="input2" class="payout" placeholder="$(optional)">
+        <input type="number"  name="input3" class="payout" placeholder="$(optional)">
+        <input type="number"  name="input4" class="payout" placeholder="$(optional)">
+        <button id="payout-btn" class="btn">Pay Bet</button>
+    </div>
+
     <div class="layout">
         <div id="banker" class="side" >
             <h3>Banker</h3>
@@ -38,9 +56,6 @@
     
     <div id="winner"></div>
 
-    <button id="play-game" class="btn active">Play Game</button>
-    <button id="submit-btn" class="btn">Submit Answer</button>
-
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

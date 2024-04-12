@@ -26,8 +26,8 @@ h1 {
 .side-bet {
     border: #111 solid 2px;
     border-radius: 50%;
-    height: 75px;
-    width: 75px;
+    height: 85px;
+    width: 85px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,13 +84,30 @@ h1 {
 }
 
 #play-game, 
-#submit-btn {
+#submit-btn,
+#pay-bets-btn,
+#pay-bets-btn,
+#play-again-btn,
+#game-btns {
     display: none;
 }
 
 #play-game.active, 
-#submit-btn.active{
+#submit-btn.active,
+#pay-bets-btn.active,
+#pay-bets-btn.active,
+#play-again-btn.active,
+#game-btns.active {
     display: inline-block;
+}
+
+#play-game,
+#submit-btn {
+    margin: 0;
+}
+
+#game-btns {
+    margin: 10px;
 }
 
 .hand {
@@ -130,26 +147,97 @@ h1 {
     min-height: 35px;
 }
 
-#alert-box {
+.action-box {
     display: none;
 }
 
-#alert-box.active {
+.action-box.active {
     display: inline-block;
     border: #222 2px solid;
     background: #37474f;
     color: #fff;
-    padding: 20px 60px 10px 60px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     border-radius: 15px;
+    width: 80%;
 }
 
 #alert-message {
     font-size: 35px;
+}
+
+#payout-box {
+    padding: 0;
+}
+
+#payout-box #title{
+    margin: 10px 0;
+    font-size: 1.6rem;
+    font-weight: 300;
+    text-decoration: underline;
+}
+
+#payout-box #bet-to-pay {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+#payout-box ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 80%;
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+#payout-box ul li {
+    margin: 3px;
+    border: #fff 2px dashed;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#payout-box ul .yellow {
+    border: black 2px dashed;
+    background: yellow;
+    color: black;
+}
+
+#payout-box ul .purple {
+    background: purple;
+}
+
+#payout-box ul .black {
+    background: black;
+}
+
+#payout-box ul .green {
+    background: green;
+}
+
+#payout-box ul .red {
+    background: red;
+}
+
+#payout-box input {
+    width: 80%;
+    font-size: 2rem;
+    margin: 3px;
+    border-radius: 8px;
+}
+
+#game-btns {
+    min-height: 60px;
 }
 
 @media(max-width: 768px) {

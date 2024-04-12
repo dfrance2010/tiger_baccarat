@@ -5,21 +5,41 @@ const bankSide = document.querySelector('#banker-total');
 const playerSide = document.querySelector('#player-total');
 const winnerDiv = document.getElementById('winner');
 
+const btnDiv = document.getElementById('game-btns');
 const playBtn = document.getElementById('play-game');
 const submitBtn = document.getElementById('submit-btn');
 
 // Side bet elements
-const bigTiger = document.getElementById('big-tiger');
+const bigTiger = document.getElementById('big_tiger');
 const tiger = document.getElementById('tiger');
-const smallTiger = document.getElementById('small-tiger');
+const smallTiger = document.getElementById('small_tiger');
 const tie = document.getElementById('tie');
 const pair = document.getElementById('pair');
 const sideBets = [bigTiger, tiger, smallTiger, tie, pair];
+const betNames = {
+  pair: 'Pair',
+  tie: 'Tie',
+  tiger: 'Tiger',
+  small_tiger: 'Small Tiger',
+  big_tiger: 'Big Tiger',
+  Pair: 'pair',
+  Tie: 'tie',
+  Tiger: 'tiger',
+  Small: 'small_tiger',
+  Big: 'big_tiger'
+}
 
 // Alert elements
 const alertBox = document.getElementById('alert-box');
 const alertMessage = document.getElementById('alert-message');
-const alertBtn = document.getElementById('alert-btn');
+const playAgainBtn = document.getElementById('play-again-btn');
+
+// Pay box elements
+const payBox = document.getElementById('payout-box');
+const list = document.getElementById('denoms');
+const payBetBtn = document.getElementById('payout-btn');
+const betToPayText = document.getElementById('bet-to-pay');
+let bet;
 
 // Game variables
 let playerTotal;
@@ -27,13 +47,15 @@ let bankTotal;
 let winner;
 
 // Side bet winning variables
-let pairWin = 0;
-let tieWin = 0;
-let bigTigerWin = 0;
-let tigerWin = 0;
-let smallTigerWin = 0;
 let bankDraw = false;
 let sideBetAnswers = [];
+const payoutSchedule = {
+  pair: 0,
+  tie: 8,
+  big_tiger: 50,
+  tiger: 0,
+  small_tiger: 22
+}
 
 // Timeout intervals
 const WAIT_1 = 1000;
@@ -43,7 +65,8 @@ let endWait = WAIT_1;
 
 playBtn.addEventListener('click', dealHand);
 submitBtn.addEventListener('click', checkAnswer);
-alertBtn.addEventListener('click', dealHand);
+playAgainBtn.addEventListener('click', dealHand);
+payBetBtn.addEventListener('click', payBets);
 
 // Side bet listeners
 sideBets.forEach(bet => bet.addEventListener('click', () => bet.classList.toggle('active')));
@@ -86,16 +109,16 @@ async function dealHand() {
   // Two pair - 20 to 1
   // Four of a kind - 100-1 
   if (playerValue1 === playerValue2) {
-    pairWin = 4;
+    payoutSchedule.pair = 4;
     sideBetAnswers.push('pair');
   }
   if (bankValue1 === bankValue2) {
     if (bankValue1 === playerValue1 && pairWin === 4) {
-      pairWin = 100;
+      payoutSchedule.pair = 100;
     } else if (pairWin === 4) {
-      pairWin = 20;
+      payoutSchedule.pair = 20;
     } else {
-      pairWin = 4;
+      payoutSchedule.pair = 4;
     }
     !sideBetAnswers.includes('pair') && sideBetAnswers.push('pair');
   }
@@ -212,9 +235,18 @@ function resetHand() {
   bankSide.innerHTML = '';
   playerSide.innerHTML = '';
   winnerDiv.innerHTML = '';
+  betToPayText.innerHTML = '';
+  list.innerHTML = '';
   banker.style.alignSelf = 'center';
-  sideBets.forEach(bet => bet.classList.add('active'));
+  sideBets.forEach(bet => {
+    bet.classList.add('active');
+    const betName = betNames[bet.getAttribute('id')];
+    const amount = createBet(betName);
+    bet.replaceChild(document.createTextNode(`${betName}\n$${amount}`), bet.childNodes[0]);
+  });
   alertBox.classList.remove('active');
+  playAgainBtn.classList.remove('active');
+  btnDiv.classList.add('active');
 }
 
 // Add Player third card image, rotated to indicate it's the third card, and calculate total
@@ -250,14 +282,12 @@ function endGame() {
     // Check for Tiger
     if (bankTotal === 6) {
       if (bankDraw) {
-        bigTigerWin = 50;
-        tigerWin = 20;
-        sideBetAnswers.push('big-tiger');
+        payoutSchedule.tiger = 20;
+        sideBetAnswers.push('big_tiger');
         sideBetAnswers.push('tiger');
       } else {
-        smallTigerWin = 22;
-        tigerWin = 12;
-        sideBetAnswers.push('small-tiger');
+        payoutSchedule.tiger = 12;
+        sideBetAnswers.push('small_tiger');
         sideBetAnswers.push('tiger');
       }
     }
@@ -265,39 +295,44 @@ function endGame() {
     winner = 'Player Wins';
   } else {
     winner = 'Tie';
-    tieWin = 8;
     sideBetAnswers.push('tie');
   }
   winnerDiv.appendChild(document.createTextNode(winner));
   playBtn.classList.remove('active');
   submitBtn.classList.add('active');
-  console.log(`Tie: ${tieWin} | Pair: ${pairWin} | Big Tiger: ${bigTigerWin} | Tiger: ${tigerWin} | Small Tiger: ${smallTigerWin}`)
 }
 
 function checkAnswer() {
   const answerNodes = document.querySelectorAll('.side-bet.active');
   const answers = [...answerNodes].map(answer => answer.id);
   let correct = true;
+  let message;
+
   sideBetAnswers.forEach(answer => {
     if (!answers.includes(answer)) {
       correct = false;
-      console.log(`false on ${answer}`)
     }
   })
-  console.log(`answers - ${(answers.length)}`);
-  console.log(`sideBetAnswers - ${sideBetAnswers.length}`);
-  console.log(correct);
-  answers.forEach(answer => {
-    console.log(answer);
-  });
-  sideBetAnswers.forEach(answer => {
-    console.log(answer);
-  })
-  if (answers.length === sideBetAnswers.length && correct) {
-    alertMessage.appendChild(document.createTextNode('Good Job!'));
+  
+  if (answers.length === sideBetAnswers.length && correct && answers.length === 0) {
+    message = 'Good Job!';
+    playAgainBtn.classList.add('active');
+  } else if (answers.length === sideBetAnswers.length && correct) {
+    message = 'Correct! Tap each bet to pay.';
+    btnDiv.classList.remove('active');
+    sideBetAnswers.forEach(answer => {
+      bet = document.getElementById(answer);
+      bet.addEventListener('click', function addListener() {
+        createPayBox(answer);
+        bet.removeEventListener('click', addListener);
+      });
+    });
   } else {
-    alertMessage.appendChild(document.createTextNode('You missed something.'));
+    message = 'You missed something.';
+    playAgainBtn.classList.add('active');
   }
+  btnDiv.classList.remove('active');
+  alertMessage.appendChild(document.createTextNode(message));
   alertBox.classList.add('active');
   submitBtn.classList.remove('active');
 }
@@ -314,3 +349,88 @@ function value(string) {
 
   return Number(string);
 }
+
+function createBet(bet) {
+  let amount;
+  if (bet === 'Pair') {
+    amount = Math.floor((Math.random() * 475) + 25);
+  } else if (bet === 'Tie') {
+    amount = Math.floor((Math.random() * 3725) + 25);
+  } else {
+    amount = Math.floor((Math.random() * 975) + 25);
+  }
+
+  return parseInt(amount / 5) * 5;
+}
+
+// Handle payouts
+function payBets() {
+  const betText = betToPayText.innerText;
+  const input = [...document.querySelectorAll('.payout')];
+  const betAmount = Number(betText.split('$')[1]);
+  const tempBetName = betText.split(' ')[0];
+  const betToPay = betNames[tempBetName];
+  let payout = 0;
+  let message;
+
+  input.forEach(inp => {
+    payout += Number(inp.value);
+    inp.value = '';
+  });
+  console.log(`payout - ${payout}`)
+  console.log(`betToPay ${betToPay}`)
+  console.log(`payout schedule - ${payoutSchedule[betToPay]}`)
+  console.log(`answer -  ${payoutSchedule[betToPay] * betAmount}`)
+  if (payout === payoutSchedule[betToPay] * betAmount) {
+    message = 'Good Job!';
+  } else {
+    message = 'Incorrect.';
+  }
+  alertMessage.replaceChild(document.createTextNode(message), alertMessage.childNodes[0]);
+  payBox.classList.remove('active');
+  if (document.querySelectorAll('.side-bet.active').length > 0) {
+    alertMessage.appendChild(document.createTextNode('Tap each bet to pay.'));
+  } else {
+    alertMessage.innerHTML = '';
+    alertMessage.appendChild(document.createTextNode(message));
+    playAgainBtn.classList.add('active');
+  }
+  alertBox.classList.add('active');
+  betToPayText.innerHTML = '';
+  list.innerHTML = '';
+  bet = document.getElementById(betToPay);
+}
+
+function createPayBox(name) {
+  bet = document.getElementById(name);
+  const betName = bet.innerText;
+  const betAmount = Number(betName.split('$')[1]);
+  alertBox.classList.remove('active');
+  betToPayText.appendChild(document.createTextNode(betName));
+  payBox.classList.add('active');
+  addChips(betAmount);
+}
+
+function addChips(amount) {
+  printChips(amount, 1000, 'yellow');
+  let remainder = amount % 1000;
+  printChips(remainder, 500, 'purple');
+  remainder %= 500;
+  printChips(remainder, 100, 'black');
+  remainder %= 100;
+  printChips(remainder, 25, 'green');
+  remainder %= 25;
+  printChips(remainder, 5, 'red');
+}
+
+function printChips(amount, denom, color) {
+  const numChips = Math.floor(amount / denom);
+  for (let i = 0; i < numChips; i++) {
+    const chips = document.createElement('li');
+    chips.className = '';
+    chips.classList.add(color);
+    chips.appendChild(document.createTextNode(`$${denom}`));
+    list.appendChild(chips);
+  }
+}
+
