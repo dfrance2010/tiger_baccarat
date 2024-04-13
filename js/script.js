@@ -269,9 +269,9 @@ function drawBankCard(img, value) {
   bankerCard3.style.transform = "rotate(90deg)";
   bankerCard3.style.marginRight = "20px";
   bankerCard3.style.marginLeft = "50px";
-  banker.style.alignSelf = "flex-start";
   banker.insertBefore(bankerCard3, banker.firstChild);
   bankTotal = (bankTotal + value) % 10;
+  banker.style.alignSelf = "flex-start";
   bankSide.replaceChild(document.createTextNode(bankTotal), bankSide.childNodes[0]);
   endWait = WAIT_3;
   bankDraw = true;
