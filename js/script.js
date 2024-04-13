@@ -253,7 +253,8 @@ function drawPlayerCard(img, value) {
   const playerCard3 = document.createElement('img');
   playerCard3.src = img;
   playerCard3.style.transform = "rotate(90deg)";
-  playerCard3.style.marginLeft = "20px";
+  playerCard3.style.marginLeft = "30px";
+  playerCard3.style.marginRight = "30px";
   player.appendChild(playerCard3);
   playerTotal = (playerTotal + value) % 10;
   playerSide.replaceChild(document.createTextNode(playerTotal), playerSide.childNodes[0]);
@@ -265,7 +266,7 @@ function drawBankCard(img, value) {
   bankerCard3.src = img;
   bankerCard3.style.transform = "rotate(90deg)";
   bankerCard3.style.marginRight = "20px";
-  bankerCard3.style.marginLeft = "50px";
+  bankerCard3.style.marginLeft = "30px";
   banker.insertBefore(bankerCard3, banker.firstChild);
   bankTotal = (bankTotal + value) % 10;
   banker.style.alignSelf = "flex-start";
@@ -359,6 +360,7 @@ function createBet(bet) {
     amount = Math.floor((Math.random() * 975) + 25);
   }
   setDenom();
+  console.log(betDenom);
   return parseInt(amount / betDenom) * betDenom;
 }
 

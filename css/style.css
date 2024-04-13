@@ -26,8 +26,8 @@ h1 {
 .side-bet {
     border: #111 solid 2px;
     border-radius: 50%;
-    height: 8rem;
-    width: 8rem;
+    height: 7rem;
+    width: 7rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,6 +48,7 @@ h1 {
     display: flex;
     text-align: center;
     flex-wrap: wrap;
+    width: 100vw;
 }
 
 .layout h3 {
@@ -61,13 +62,14 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 30px;
-    min-width: 380px;
+    margin-right: 25px;
+    min-width: 48%;
 }
 
 #player {
     margin: 0;
 }
+
 
 .btn { 
     background: #b5651d;
@@ -119,7 +121,7 @@ h1 {
 
 .hand {
     display: flex;
-    width: 100px;
+    width: 125px;
     align-self: flex-start;
     min-height: 150px;
 }
@@ -170,7 +172,7 @@ h1 {
     align-items: center;
     text-align: center;
     border-radius: 15px;
-    width: 80%;
+    width: 50%;
 }
 
 #alert-message {
@@ -296,6 +298,10 @@ h1 {
         margin-top: 10px;
         padding: 10px 20px;
         font-size: 25px;
+    }
+
+    .action-box.active {
+        width: 80%;
     }
 }
 
