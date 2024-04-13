@@ -28,6 +28,7 @@ const betNames = {
   Small: 'small_tiger',
   Big: 'big_tiger'
 }
+let betDenom = 25;
 
 // Alert elements
 const alertBox = document.getElementById('alert-box');
@@ -361,8 +362,18 @@ function createBet(bet) {
   } else {
     amount = Math.floor((Math.random() * 975) + 25);
   }
+  setDenom();
+  return parseInt(amount / betDenom) * betDenom;
+}
 
-  return parseInt(amount / 5) * 5;
+function setDenom() {
+  const randNum = Math.floor((Math.random() * 9) + 1);
+  console.log(randNum);
+  if (randNum === 1) {
+    betDenom = 5;
+  } else {
+    betDenom = 25;
+  }
 }
 
 // Handle payouts
