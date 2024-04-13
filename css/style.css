@@ -121,7 +121,7 @@ h1 {
 
 .hand {
     display: flex;
-    width: 125px;
+    width: 110px;
     align-self: flex-start;
     min-height: 150px;
 }
