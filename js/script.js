@@ -114,9 +114,9 @@ async function dealHand() {
     sideBetAnswers.push('pair');
   }
   if (bankValue1 === bankValue2) {
-    if (bankValue1 === playerValue1 && pairWin === 4) {
+    if (bankValue1 === playerValue1 && payoutSchedule.pair === 4) {
       payoutSchedule.pair = 100;
-    } else if (pairWin === 4) {
+    } else if (payoutSchedule.pair === 4) {
       payoutSchedule.pair = 20;
     } else {
       payoutSchedule.pair = 4;
