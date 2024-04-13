@@ -394,6 +394,7 @@ function payBets() {
   } else {
     incorrectMsg.classList.add('active');
   }
+  incorrectMsg.classList.remove('active');
 }
 
 function createPayBox(name) {
