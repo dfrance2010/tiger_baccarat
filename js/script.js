@@ -368,7 +368,6 @@ function createBet(bet) {
 
 function setDenom() {
   const randNum = Math.floor((Math.random() * 9) + 1);
-  console.log(randNum);
   if (randNum === 1) {
     betDenom = 5;
   } else {
@@ -390,6 +389,8 @@ function payBets() {
     payout += Number(inp.value);
     inp.value = '';
   });
+  console.log(`payout - ${payout}`)
+  console.log(`answer - ${payoutSchedule[betToPay] * betAmount}`)
   if (payout === payoutSchedule[betToPay] * betAmount) {
     incorrectMsg.classList.remove('active');
     alertMessage.replaceChild(document.createTextNode('Good Job!'), alertMessage.childNodes[0]);
