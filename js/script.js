@@ -229,7 +229,6 @@ function resetHand() {
   playerTotal = 0;
   bankTotal = 0;
   endWait = WAIT_1;
-  alertMessage.innerHTML = '';
   player.innerHTML = '';
   banker.innerHTML = '';
   bankSide.innerHTML = '';
@@ -316,10 +315,13 @@ function checkAnswer() {
   
   if (answers.length === sideBetAnswers.length && correct && answers.length === 0) {
     message = 'Good Job!';
+    btnDiv.classList.remove('active');
+    submitBtn.classList.remove('active');
     playAgainBtn.classList.add('active');
   } else if (answers.length === sideBetAnswers.length && correct) {
     message = 'Correct! Tap each bet to pay.';
     btnDiv.classList.remove('active');
+    submitBtn.classList.remove('active');
     sideBetAnswers.forEach(answer => {
       bet = document.getElementById(answer);
       bet.addEventListener('click', function addListener() {
@@ -329,12 +331,9 @@ function checkAnswer() {
     });
   } else {
     message = 'You missed something.';
-    playAgainBtn.classList.add('active');
   }
-  btnDiv.classList.remove('active');
-  alertMessage.appendChild(document.createTextNode(message));
+  alertMessage.replaceChild(document.createTextNode(message), alertMessage.childNodes[0]);
   alertBox.classList.add('active');
-  submitBtn.classList.remove('active');
 }
 
 // Calculate integer value from returned JSON value
