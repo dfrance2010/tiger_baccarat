@@ -248,6 +248,7 @@ function resetHand() {
   playAgainBtn.classList.remove('active');
   btnDiv.classList.add('active');
   incorrectMsg.classList.remove('active');
+  incorrectMsg.classList.remove('active');
 }
 
 // Add Player third card image, rotated to indicate it's the third card, and calculate total
@@ -379,6 +380,7 @@ function payBets() {
     inp.value = '';
   });
   if (payout === payoutSchedule[betToPay] * betAmount) {
+    incorrectMsg.classList.remove('active');
     alertMessage.replaceChild(document.createTextNode('Good Job!'), alertMessage.childNodes[0]);
     payBox.classList.remove('active');
     if (document.querySelectorAll('.side-bet.active').length > 0) {
@@ -394,7 +396,6 @@ function payBets() {
   } else {
     incorrectMsg.classList.add('active');
   }
-  incorrectMsg.classList.remove('active');
 }
 
 function createPayBox(name) {
