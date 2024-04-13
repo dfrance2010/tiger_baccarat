@@ -88,7 +88,8 @@ h1 {
 #pay-bets-btn,
 #pay-bets-btn,
 #play-again-btn,
-#game-btns {
+#game-btns,
+#incorrect-message {
     display: none;
 }
 
@@ -97,7 +98,8 @@ h1 {
 #pay-bets-btn.active,
 #pay-bets-btn.active,
 #play-again-btn.active,
-#game-btns.active {
+#game-btns.active,
+#incorrect-message.active {
     display: inline-block;
 }
 
@@ -185,6 +187,14 @@ h1 {
     margin-bottom: 10px;
     font-size: 2rem;
     font-weight: 300;
+}
+
+#payout-box #incorrect-message {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background: #222;
+    border-radius: 10px;
 }
 
 #payout-box ul {

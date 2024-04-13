@@ -39,6 +39,7 @@ const payBox = document.getElementById('payout-box');
 const list = document.getElementById('denoms');
 const payBetBtn = document.getElementById('payout-btn');
 const betToPayText = document.getElementById('bet-to-pay');
+const incorrectMsg = document.getElementById('incorrect-message');
 let bet;
 
 // Game variables
@@ -246,6 +247,7 @@ function resetHand() {
   alertBox.classList.remove('active');
   playAgainBtn.classList.remove('active');
   btnDiv.classList.add('active');
+  incorrectMsg.classList.remove('active');
 }
 
 // Add Player third card image, rotated to indicate it's the third card, and calculate total
@@ -376,28 +378,22 @@ function payBets() {
     payout += Number(inp.value);
     inp.value = '';
   });
-  console.log(`payout - ${payout}`)
-  console.log(`betToPay ${betToPay}`)
-  console.log(`payout schedule - ${payoutSchedule[betToPay]}`)
-  console.log(`answer -  ${payoutSchedule[betToPay] * betAmount}`)
   if (payout === payoutSchedule[betToPay] * betAmount) {
-    message = 'Good Job!';
+    alertMessage.replaceChild(document.createTextNode('Good Job!'), alertMessage.childNodes[0]);
+    payBox.classList.remove('active');
+    if (document.querySelectorAll('.side-bet.active').length > 0) {
+      alertMessage.replaceChild(document.createTextNode('Good Job!\nTap each bet to pay.'), alertMessage.childNodes[0]);
+    } else {
+      alertMessage.replaceChild(document.createTextNode('Good Job!'), alertMessage.childNodes[0]);
+      playAgainBtn.classList.add('active');
+    }
+    alertBox.classList.add('active');
+    betToPayText.innerHTML = '';
+    list.innerHTML = '';
+    bet = document.getElementById(betToPay);
   } else {
-    message = 'Incorrect.';
+    incorrectMsg.classList.add('active');
   }
-  alertMessage.replaceChild(document.createTextNode(message), alertMessage.childNodes[0]);
-  payBox.classList.remove('active');
-  if (document.querySelectorAll('.side-bet.active').length > 0) {
-    alertMessage.appendChild(document.createTextNode('Tap each bet to pay.'));
-  } else {
-    alertMessage.innerHTML = '';
-    alertMessage.appendChild(document.createTextNode(message));
-    playAgainBtn.classList.add('active');
-  }
-  alertBox.classList.add('active');
-  betToPayText.innerHTML = '';
-  list.innerHTML = '';
-  bet = document.getElementById(betToPay);
 }
 
 function createPayBox(name) {
