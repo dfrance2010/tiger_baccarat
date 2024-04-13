@@ -254,7 +254,6 @@ function drawPlayerCard(img, value) {
   playerCard3.src = img;
   playerCard3.style.transform = "rotate(90deg)";
   playerCard3.style.marginLeft = "25px";
-  playerCard3.style.marginRight = "30px";
   player.appendChild(playerCard3);
   playerTotal = (playerTotal + value) % 10;
   playerSide.replaceChild(document.createTextNode(playerTotal), playerSide.childNodes[0]);
