@@ -221,15 +221,11 @@ async function dealHand() {
 
 // Reset values and divs at the start of each hand
 function resetHand() {
-  pairWin = 0;
-  tieWin = 0;
-  bigTigerWin = 0;
-  tigerWin = 0;
-  smallTigerWin = 0;
   bankDraw = false; 
   sideBetAnswers = [];
   playerTotal = 0;
   bankTotal = 0;
+  payoutSchedule.pair = 0;
   endWait = WAIT_1;
   player.innerHTML = '';
   banker.innerHTML = '';
