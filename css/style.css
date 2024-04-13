@@ -63,12 +63,8 @@ h1 {
     justify-content: center;
     align-items: center;
     min-width: 48%;
+    margin-left: 20px;
 }
-
-#player {
-    margin: 0;
-}
-
 
 .btn { 
     background: #b5651d;
