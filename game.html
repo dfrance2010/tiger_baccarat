@@ -8,7 +8,48 @@
     <title>Tiger Bet</title>
 </head>
 <body>
-    <h1>Tiger Baccarat</h1>
+    <header>
+        <div id="tiger-img">
+        </div>
+        <h1>Tiger Baccarat</h1>
+        <div id="more-tigers">Give me more Tigers</div>
+    </header>
+
+    <div id="tiger-freq-box">
+        <div class="radio">
+            <input type="radio" name="tiger-radio" value="normal" class="check" checked>
+            Normal
+            <p>
+                Just like real life - about four tigers per shoe.
+            </p>
+        </div>
+        <div class="radio">
+            <input type="radio" name="tiger-radio" value="10" class="check">
+            A few more
+            <p>
+                About twice as often as normal - still not many
+            </p>
+        </div>
+        <div class="radio">
+            <input type="radio" name="tiger-radio" value="5" class="check">
+            A lot more
+            <p>
+                About four times as often as normal
+            </p>
+        </div>
+        <div class="radio">
+            <input type="radio" name="tiger-radio" value="all" class="check">
+            All tigers 
+            <p>
+                AKA - the Dennis Moore Special
+            </p>
+        </div>
+        <div id="tiger-btns">
+            <button id="tiger-update" class="btn">Update</button>
+            <button id="tiger-cancel" class="btn">Cancel</button>
+        </div>
+    </div>
+
     <div id="tigers">
         <div id="big_tiger" class="side-bet active">Big Tiger</div>
         <div id="tiger" class="side-bet active">Tiger</div>
@@ -46,7 +87,10 @@
     <div class="layout">
         <div id="banker" class="side" >
             <h3>Banker</h3>
-            <div id="banker-cards" class="hand"></div>
+            <div id="bank-hand" class="hand">
+                <div id="bank-3rd-card"></div>
+                <div id="banker-cards" class="hand"></div>
+            </div>
             <div id="banker-total" class="total"></div>
         </div>
         <div id="player" class="side" >
@@ -57,10 +101,11 @@
     </div>
     
     <div id="winner"></div>
+
     <footer id="main-footer">
         <p>&copy2024 David France</p>
     </footer>
-    
-    <script src="js/script.js"></script>
+
+    <script src="js/script.js" type="module"></script>
 </body>
 </html>

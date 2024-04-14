@@ -14,8 +14,77 @@ body {
     background: #006400;
 }
 
-h1 {
+header {
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+}
+
+header div {
+    width: 250px;
+    margin-left: 20px;
+}
+
+header h1 {
     color: #fff;
+}
+
+#more-tigers {
+    font-size: 1.4rem;
+    text-align: center;
+    max-width: 244px;
+    margin-right: 15px;
+    margin-top: 5px;
+    background: #222;
+    color: #fff;
+    border: #e48400 solid 2px;
+    padding: 2px 3px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#tiger-freq-box {
+    position: fixed;
+    top: -600px;
+    right: 15px;
+    background: #222;
+    color: #fff;
+    border: #e48400 solid 2px;
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-radius: 5px;
+    transition: transform 0.5s;
+}
+
+#tiger-freq-box.active {
+    transform: translateY(640px);
+}
+
+.radio {
+    font-size: 1.5rem;
+    line-height: 2.3rem;
+    margin: 0;
+}
+
+.radio input {
+    height: 25px;
+    width: 25px;
+}
+
+.radio p {
+    margin-left: 30px;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    max-width: 200px;
+}
+
+#tiger-update,
+#tiger-cancel {
+    font-size: 1.2rem;
+    margin: 8px 0;
 }
 
 #tigers,
@@ -26,8 +95,8 @@ h1 {
 .side-bet {
     border: #111 solid 2px;
     border-radius: 50%;
-    height: 7rem;
-    width: 7rem;
+    height: 85px;
+    width: 85px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,7 +106,6 @@ h1 {
     margin: 10px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1.5rem;
 }
 
 .side-bet.active {
@@ -48,7 +116,6 @@ h1 {
     display: flex;
     text-align: center;
     flex-wrap: wrap;
-    width: 100vw;
 }
 
 .layout h3 {
@@ -62,8 +129,12 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width: 48%;
-    margin-left: 10px;
+    margin-right: 30px;
+    min-width: 380px;
+}
+
+#player {
+    margin: 0;
 }
 
 .btn { 
@@ -71,8 +142,8 @@ h1 {
     color: #fff;
     margin: 20px 0;
     padding: 10px 20px;
-    font-size: 40px;
-    border-radius: 10px;
+    font-size: 25px;
+    border-radius: 7px;
     border: #222 solid 1px;
     cursor: pointer;
 }
@@ -116,7 +187,7 @@ h1 {
 
 .hand {
     display: flex;
-    width: 110px;
+    width: 100px;
     align-self: flex-start;
     min-height: 150px;
 }
@@ -136,7 +207,7 @@ h1 {
 .hand img {
     max-width: 100%;
     height: auto;
-    margin: 2px;
+    margin: 5px;
 }
 
 .total {
@@ -167,7 +238,7 @@ h1 {
     align-items: center;
     text-align: center;
     border-radius: 15px;
-    width: 50%;
+    width: 80%;
 }
 
 #alert-message {
@@ -252,15 +323,11 @@ h1 {
     min-height: 60px;
 }
 
-footer {
-    margin-bottom: 30px;
+footer #image-cite {
+    display: none;
 }
 
 @media(max-width: 980px) {
-
-    h1 {
-        margin: 100px 0 60px 0;
-    }
 
     #game-btns {
         margin: 60px 0;
@@ -269,12 +336,22 @@ footer {
 
 @media(max-width: 768px) {
 
-    h1 {
-        margin: 40px 0 20px 0;
+    header {
+        width: 100vw;
+    }
+    header h1 {
+        text-align: center;
+        margin: 3px 5px;
     }
 
-    #game-btns {
-        margin: 30px 0 20px 0;
+    header div {
+        width: 200px;
+        margin-left: 0;
+    }
+
+    #more-tigers {
+        max-width: 200px;
+        margin: 3px;
     }
 
     .layout {
@@ -295,20 +372,14 @@ footer {
         align-self: center;
     }
 
-    .side-bet {
-        height: 85px;
-        width: 85px;
-        font-size: 1rem;
-    }
-
-    .btn {
+    #play-game {
         margin-top: 10px;
         padding: 10px 20px;
         font-size: 25px;
     }
 
-    .action-box.active {
-        width: 80%;
+    footer p {
+        text-align: center;
     }
 }
 

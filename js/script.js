@@ -1,3 +1,4 @@
+import { createTigerDeck } from "./tigerDeck.js";
 // Game elements
 const banker = document.querySelector('#banker-cards');
 const player = document.querySelector('#player-cards');
@@ -47,6 +48,7 @@ let bet;
 let playerTotal;
 let bankTotal;
 let winner;
+let tigerFreq = 'normal';
 
 // Side bet winning variables
 let bankDraw = false;
@@ -83,7 +85,18 @@ async function dealHand() {
 
   // Draw 6 cards - 4, 5, or 6 cards might be used
   const hand = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=6`);
-  const openingCards = await hand.json();
+  let openingCards;
+  if (tigerFreq === 'normal') {
+    openingCards = await hand.json();
+  } else if (tigerFreq === 'all') {
+    openingCards = createTigerDeck();
+  } else {
+    if (!shouldCreateTiger(Number(tigerFreq))) {
+      openingCards = await hand.json();
+    } else {   
+      openingCards = createTigerDeck();
+    }
+  }
 
   // Create images for first 4 cards
   const playerCard1 = document.createElement('img');
@@ -98,10 +111,10 @@ async function dealHand() {
   bankCard2.src = openingCards.cards[3].image;
 
   // Calculate totals for each side
-  playerValue1 = openingCards.cards[0].value;
-  playerValue2 = openingCards.cards[1].value;
-  bankValue1 = openingCards.cards[2].value;
-  bankValue2 = openingCards.cards[3].value;
+  const playerValue1 = openingCards.cards[0].value;
+  const playerValue2 = openingCards.cards[1].value;
+  const bankValue1 = openingCards.cards[2].value;
+  const bankValue2 = openingCards.cards[3].value;
 
   playerTotal = (value(playerValue1) + value(playerValue2)) % 10;
   bankTotal = (value(bankValue1) + value(bankValue2)) % 10;
@@ -225,7 +238,6 @@ function resetHand() {
   sideBetAnswers = [];
   playerTotal = 0;
   bankTotal = 0;
-  payoutSchedule.pair = 0;
   endWait = WAIT_1;
   player.innerHTML = '';
   banker.innerHTML = '';
@@ -253,7 +265,7 @@ function drawPlayerCard(img, value) {
   const playerCard3 = document.createElement('img');
   playerCard3.src = img;
   playerCard3.style.transform = "rotate(90deg)";
-  playerCard3.style.marginLeft = "22px";
+  playerCard3.style.marginLeft = "20px";
   player.appendChild(playerCard3);
   playerTotal = (playerTotal + value) % 10;
   playerSide.replaceChild(document.createTextNode(playerTotal), playerSide.childNodes[0]);
@@ -265,7 +277,7 @@ function drawBankCard(img, value) {
   bankerCard3.src = img;
   bankerCard3.style.transform = "rotate(90deg)";
   bankerCard3.style.marginRight = "20px";
-  bankerCard3.style.marginLeft = "20px";
+  bankerCard3.style.marginLeft = "50px";
   banker.insertBefore(bankerCard3, banker.firstChild);
   bankTotal = (bankTotal + value) % 10;
   banker.style.alignSelf = "flex-start";
@@ -359,7 +371,6 @@ function createBet(bet) {
     amount = Math.floor((Math.random() * 975) + 25);
   }
   setDenom();
-  console.log(betDenom);
   return parseInt(amount / betDenom) * betDenom;
 }
 
@@ -386,8 +397,6 @@ function payBets() {
     payout += Number(inp.value);
     inp.value = '';
   });
-  console.log(`payout - ${payout}`)
-  console.log(`answer - ${payoutSchedule[betToPay] * betAmount}`)
   if (payout === payoutSchedule[betToPay] * betAmount) {
     incorrectMsg.classList.remove('active');
     alertMessage.replaceChild(document.createTextNode('Good Job!'), alertMessage.childNodes[0]);
@@ -438,5 +447,40 @@ function printChips(amount, denom, color) {
     chips.appendChild(document.createTextNode(`$${denom}`));
     list.appendChild(chips);
   }
+}
+
+// Tiger Options
+const moreTigers = document.getElementById('more-tigers');
+const tigerBox = document.getElementById('tiger-freq-box');
+const tigerOptions = document.getElementsByName('tiger-radio');
+const tigerUpdate = document.getElementById('tiger-update');
+const tigerCancel = document.getElementById('tiger-cancel');
+
+const tigerTemp = document.getElementById('tiger-temp');
+
+moreTigers.addEventListener('click', toggleTiger);
+
+tigerCancel.addEventListener('click', toggleTiger);
+
+function toggleTiger() {
+  tigerBox.classList.toggle('active');
+}
+
+tigerUpdate.addEventListener('click', () => {
+  for (let i = 0; i < tigerOptions.length; i++) {
+    if (tigerOptions[i].checked) {
+      tigerFreq = tigerOptions[i].value;
+    }
+  }
+  toggleTiger();
+});
+
+function shouldCreateTiger(freq) {
+  const num = Math.floor(Math.random() * freq);
+  if (num === 1) {
+    return true;
+  }
+
+  return false;
 }
 
