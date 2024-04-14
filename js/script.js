@@ -478,10 +478,14 @@ function toggleTiger() {
 }
 
 function setChecked() {
+  console.log(tigerFreq);
   for (let i = 0; i < tigerOptions.length; i++) {
-    if (tigerOptions[i].value = tigerFreq) {
+    console.log(`tigerOption - ${tigerOptions[i].value} - freq - ${tigerFreq}`)
+    if (tigerOptions[i].value === tigerFreq) {
+      console.log(`setting checked for ${tigerOptions[i].value}`)
       tigerOptions[i].checked = true;
     } else {
+      console.log(`removing checked for ${tigerOptions[i].value}`)
       tigerOptions[i].checked = false;
     }
   }
