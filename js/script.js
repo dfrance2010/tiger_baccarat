@@ -456,24 +456,46 @@ const tigerOptions = document.getElementsByName('tiger-radio');
 const tigerUpdate = document.getElementById('tiger-update');
 const tigerCancel = document.getElementById('tiger-cancel');
 
-const tigerTemp = document.getElementById('tiger-temp');
+moreTigers.addEventListener('click', () => {
+  if (tigerBox.classList.contains('active')) {
+  setTigerFreq();
+}
+  toggleTiger();
+});
 
-moreTigers.addEventListener('click', toggleTiger);
+tigerUpdate.addEventListener('click', () => {
+  setTigerFreq();
+  toggleTiger();
+});
 
-tigerCancel.addEventListener('click', toggleTiger);
+tigerCancel.addEventListener('click', () => {
+  toggleTiger();
+  setChecked();
+});
 
 function toggleTiger() {
   tigerBox.classList.toggle('active');
 }
 
-tigerUpdate.addEventListener('click', () => {
+function setChecked() {
+  for (let i = 0; i < tigerOptions.length; i++) {
+    if (tigerOptions[i].value = tigerFreq) {
+      tigerOptions[i].checked = true;
+    } else {
+      tigerOptions[i].checked = false;
+    }
+  }
+}
+
+
+
+function setTigerFreq() {
   for (let i = 0; i < tigerOptions.length; i++) {
     if (tigerOptions[i].checked) {
       tigerFreq = tigerOptions[i].value;
     }
   }
-  toggleTiger();
-});
+}
 
 function shouldCreateTiger(freq) {
   const num = Math.floor(Math.random() * freq);
