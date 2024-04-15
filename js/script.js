@@ -398,6 +398,12 @@ function payBets() {
     inp.value = '';
   });
   if (payout === payoutSchedule[betToPay] * betAmount) {
+    if (betToPay === 'big_tiger') {
+      playTigerSound();
+    }
+    if (betToPay === 'small_tiger') {
+      playCatSound();
+    }
     incorrectMsg.classList.remove('active');
     alertMessage.replaceChild(document.createTextNode('Good Job!'), alertMessage.childNodes[0]);
     payBox.classList.remove('active');
@@ -508,5 +514,15 @@ function shouldCreateTiger(freq) {
   }
 
   return false;
+}
+
+function playCatSound() {
+  const catNum = Math.floor(Math.random() * 7) + 1;
+  document.getElementById(`cat_${catNum}`).play();
+}
+
+function playTigerSound() {
+  const tigerNum = Math.floor(Math.random() * 8) + 1;
+  document.getElementById(`tiger_${tigerNum}`).play();
 }
 
