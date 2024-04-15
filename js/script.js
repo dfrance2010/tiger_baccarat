@@ -516,6 +516,8 @@ function setTigerFreq() {
 function shouldCreateTiger(freq) {
   const num = Math.floor(Math.random() * freq);
   if (num === 1) {
+    playCorrectSound();
+    console.log('Playing with tiger deck')
     return true;
   }
 
