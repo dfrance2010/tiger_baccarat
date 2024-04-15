@@ -1,4 +1,9 @@
 import { createTigerDeck } from "./tigerDeck.js";
+const music = document.getElementById('main-theme');
+music.loop = true;
+music.volume = 0.1;
+music.play();
+
 // Game elements
 const banker = document.querySelector('#banker-cards');
 const player = document.querySelector('#player-cards');
@@ -400,9 +405,10 @@ function payBets() {
   if (payout === payoutSchedule[betToPay] * betAmount) {
     if (betToPay === 'big_tiger') {
       playTigerSound();
-    }
-    if (betToPay === 'small_tiger') {
+    } else if (betToPay === 'small_tiger') {
       playCatSound();
+    } else {
+      playCorrectSound();
     }
     incorrectMsg.classList.remove('active');
     alertMessage.replaceChild(document.createTextNode('Good Job!'), alertMessage.childNodes[0]);
@@ -524,5 +530,10 @@ function playCatSound() {
 function playTigerSound() {
   const tigerNum = Math.floor(Math.random() * 8) + 1;
   document.getElementById(`tiger_${tigerNum}`).play();
+}
+
+function playCorrectSound() {
+  const num = Math.floor(Math.random() * 5) + 1;
+  document.getElementById(`tiger_correct_${num}`).play();
 }
 

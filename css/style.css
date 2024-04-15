@@ -26,6 +26,7 @@ header div {
 }
 
 header h1 {
+    padding-top: 10px;
     color: #fff;
 }
 
@@ -345,6 +346,7 @@ header h1 {
     header h1 {
         text-align: center;
         margin: 3px 5px;
+        padding: 0;
     }
 
     header div {
