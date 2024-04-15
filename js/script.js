@@ -1,4 +1,5 @@
 import { createTigerDeck } from "./tigerDeck.js";
+import { keys } from "./hints.js";
 const music = document.getElementById('main-theme');
 music.loop = true;
 music.volume = 0.1;
@@ -47,6 +48,8 @@ const list = document.getElementById('denoms');
 const payBetBtn = document.getElementById('payout-btn');
 const betToPayText = document.getElementById('bet-to-pay');
 const incorrectMsg = document.getElementById('incorrect-message');
+const betHints = document.getElementById('hint');
+const hintBtn = document.getElementById('hint-btn');
 let bet;
 
 // Game variables
@@ -76,6 +79,7 @@ playBtn.addEventListener('click', dealHand);
 submitBtn.addEventListener('click', checkAnswer);
 playAgainBtn.addEventListener('click', dealHand);
 payBetBtn.addEventListener('click', payBets);
+hintBtn.addEventListener('click', () => betHints.classList.toggle('active'))
 
 // Side bet listeners
 sideBets.forEach(bet => bet.addEventListener('click', () => bet.classList.toggle('active')));
@@ -263,6 +267,7 @@ function resetHand() {
   btnDiv.classList.add('active');
   incorrectMsg.classList.remove('active');
   incorrectMsg.classList.remove('active');
+  betHints.classList.remove('active');
 }
 
 // Add Player third card image, rotated to indicate it's the third card, and calculate total
@@ -342,6 +347,7 @@ function checkAnswer() {
     sideBetAnswers.forEach(answer => {
       bet = document.getElementById(answer);
       bet.addEventListener('click', function addListener() {
+        betHints.classList.remove('active');
         createPayBox(answer);
         bet.removeEventListener('click', addListener);
       });
@@ -396,7 +402,6 @@ function payBets() {
   const tempBetName = betText.split(' ')[0];
   const betToPay = betNames[tempBetName];
   let payout = 0;
-  let message;
 
   input.forEach(inp => {
     payout += Number(inp.value);
@@ -432,6 +437,23 @@ function createPayBox(name) {
   bet = document.getElementById(name);
   const betName = bet.innerText;
   const betAmount = Number(betName.split('$')[1]);
+  const hintName = betName.split(' ')[0];
+  // const betToPay = betNames[hintName];
+  // const hints = keys.betToPay;
+  let hint = betNames[hintName];
+  if (hint === 'tiger') {
+    if (payoutSchedule.tiger === 20) {
+      hint = 'tiger_high';
+    } else {
+      hint = 'tiger_low';
+    }
+  }
+  betHints.innerHTML = '';
+  keys[hint].forEach(hint => {
+    const listItem = document.createElement('li');
+    listItem.appendChild(document.createTextNode(hint));
+    betHints.appendChild(listItem);
+  });
   alertBox.classList.remove('active');
   betToPayText.appendChild(document.createTextNode(betName));
   payBox.classList.add('active');
