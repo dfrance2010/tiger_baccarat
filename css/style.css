@@ -116,6 +116,7 @@ header h1 {
     display: flex;
     text-align: center;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .layout h3 {
@@ -238,7 +239,7 @@ header h1 {
     align-items: center;
     text-align: center;
     border-radius: 15px;
-    width: 80%;
+    width: 50%;
 }
 
 #alert-message {
@@ -355,6 +356,10 @@ header h1 {
         margin: 3px;
     }
 
+    .action-box.active {
+        width: 80%;
+    }
+
     .layout {
         width: 100vw;
     }
@@ -366,11 +371,6 @@ header h1 {
 
     .hand img {
         height: 105;
-    }
-
-    .side {
-        width: 100%;
-        align-self: center;
     }
 
     #play-game {

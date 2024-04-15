@@ -13,28 +13,28 @@ export function createTigerDeck() {
 
   const tigerDeck = {
     "cards": [{
-      "image": `https://deckofcardsapi.com/static/img/${playerCards[0].rank}${chooseSuit()}.png`,
-      "value": playerCards[0].value
+      "image": `https://deckofcardsapi.com/static/img/${playerCards[0]}${chooseSuit()}.png`,
+      "value": playerCards[0]
     },
     {
-      "image": `https://deckofcardsapi.com/static/img/${playerCards[1].rank}${chooseSuit()}.png`,
-      "value": playerCards[1].value
+      "image": `https://deckofcardsapi.com/static/img/${playerCards[1]}${chooseSuit()}.png`,
+      "value": playerCards[1]
     },
     {
-      "image": `https://deckofcardsapi.com/static/img/${bankCards[0].rank}${chooseSuit()}.png`,
-      "value": bankCards[0].value
+      "image": `https://deckofcardsapi.com/static/img/${bankCards[0]}${chooseSuit()}.png`,
+      "value": bankCards[0]
     },
     {
-      "image": `https://deckofcardsapi.com/static/img/${bankCards[1].rank}${chooseSuit()}.png`,
-      "value": bankCards[1].value
+      "image": `https://deckofcardsapi.com/static/img/${bankCards[1]}${chooseSuit()}.png`,
+      "value": bankCards[1]
     },
     {
-      "image": `https://deckofcardsapi.com/static/img/${playerCards[2].rank}${chooseSuit()}.png`,
-      "value": playerCards[2].value
+      "image": `https://deckofcardsapi.com/static/img/${playerCards[2]}${chooseSuit()}.png`,
+      "value": playerCards[2]
     },
     {
-      "image": `https://deckofcardsapi.com/static/img/${bankCards[2].rank}${chooseSuit()}.png`,
-      "value": bankCards[2].value
+      "image": `https://deckofcardsapi.com/static/img/${bankCards[2]}${chooseSuit()}.png`,
+      "value": bankCards[2]
     }
   ]
 }
@@ -55,20 +55,8 @@ function chooseSmallBankCards() {
   const cardOne = Math.floor(Math.random() * 6);
   const cardTwo = 6 - cardOne;
 
-  return [
-    {
-      rank: cardRank(cardOne),
-      value: cardOne
-    },
-    {
-      rank:  cardRank(cardTwo),
-      value: cardTwo
-    },
-    {
-      rank: 'A',
-      value: 1
-    }
-  ];
+  
+  return [cardRank(cardOne), cardRank(cardTwo), cardRank(cardOne)];
 }
 
 function choosePlayerCards() {
@@ -76,20 +64,7 @@ function choosePlayerCards() {
   const cardTwo = Math.floor(Math.random() * (5 - cardOne));
   const cardThree = Math.floor(Math.random() * (5 - (cardOne + cardTwo)));
 
-  return [
-    {
-      rank: cardRank(cardOne),
-      value: cardOne
-    },
-    {
-      rank: cardRank(cardTwo),
-      value: cardTwo
-    },
-    {
-      rank: cardRank(cardThree),
-      value: cardThree
-    }
-  ];
+  return [cardRank(cardOne), cardRank(cardTwo), cardRank(cardThree)];
 }
 
 function chooseBigBankCards() {
@@ -97,20 +72,7 @@ function chooseBigBankCards() {
   const cardTwo = Math.floor(Math.random() * (2 - cardOne));
   const cardThree = 6 - (cardOne + cardTwo);
 
-  return [
-    {
-      rank: cardRank(cardOne),
-      value: cardOne
-    },
-    {
-      rank:  cardRank(cardTwo),
-      value: cardTwo
-    },
-    {
-      rank: cardRank(cardThree),
-      value: cardThree
-    }
-  ];
+  return [cardRank(cardOne), cardRank(cardTwo), cardRank(cardThree)];
 }
 
 function cardRank(value) {

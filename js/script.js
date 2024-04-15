@@ -350,7 +350,7 @@ function checkAnswer() {
 
 // Calculate integer value from returned JSON value
 function value(string) {
-  if (string === "ACE") {
+  if (string === "ACE" || string === 'A') {
     return 1;
   } 
   // Face cards = 0
