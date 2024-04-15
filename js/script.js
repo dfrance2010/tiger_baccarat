@@ -247,6 +247,7 @@ function resetHand() {
   sideBetAnswers = [];
   playerTotal = 0;
   bankTotal = 0;
+  payoutSchedule.pair = 0;
   endWait = WAIT_1;
   player.innerHTML = '';
   banker.innerHTML = '';
