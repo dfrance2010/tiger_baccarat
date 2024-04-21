@@ -41,6 +41,7 @@ let betDenom = 25;
 const alertBox = document.getElementById('alert-box');
 const alertMessage = document.getElementById('alert-message');
 const playAgainBtn = document.getElementById('play-again-btn');
+const messageBox = document.getElementById('message-box');
 
 // Pay box elements
 const payBox = document.getElementById('payout-box');
@@ -324,6 +325,8 @@ function endGame() {
   winnerDiv.appendChild(document.createTextNode(winner));
   playBtn.classList.remove('active');
   submitBtn.classList.add('active');
+  messageBox.classList.add('helpful');
+  messageBox.replaceChild(document.createTextNode('Tap or click on each losing bet to remove'), messageBox.childNodes[0]);
 }
 
 function checkAnswer() {
@@ -360,6 +363,7 @@ function checkAnswer() {
   }
   alertMessage.replaceChild(document.createTextNode(message), alertMessage.childNodes[0]);
   alertBox.classList.add('active');
+  messageBox.classList.remove('helpful');
 }
 
 // Calculate integer value from returned JSON value
@@ -410,6 +414,7 @@ function payBets() {
     payout += Number(inp.value);
     inp.value = '';
   });
+  messageBox.classList.remove('warning');
   if (payout === payoutSchedule[betToPay] * betAmount) {
     if (betToPay === 'big_tiger') {
       playTigerSound();
@@ -438,7 +443,9 @@ function payBets() {
 
 function createPayBox(name) {
   if (payBox.classList.contains('active')) {
-    alert('Pay current bet before moving to the next one.');
+    messageBox.replaceChild(document.createTextNode('Pay current bet before moving to the next one'), messageBox.childNodes[0]);
+    messageBox.classList.remove('helpful');
+    messageBox.classList.add('warning');
     return;
   }
   bet = document.getElementById(name);

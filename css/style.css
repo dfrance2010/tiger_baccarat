@@ -248,6 +248,25 @@ header h1 {
     font-size: 35px;
 }
 
+#message-box {
+    display: none;
+    border: #333 solid 1px;
+    padding: 3px 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+#message-box.helpful {
+    display: block;
+    background: #333;
+}
+
+#message-box.warning {
+    display: block;
+    background: #d0342c;
+}
+
 #payout-box {
     padding: 0;
 }
