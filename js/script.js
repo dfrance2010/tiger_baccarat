@@ -82,7 +82,9 @@ payBetBtn.addEventListener('click', payBets);
 hintBtn.addEventListener('click', () => betHints.classList.toggle('active'))
 
 // Side bet listeners
-sideBets.forEach(bet => bet.addEventListener('click', function toggleListener() {bet.classList.toggle('active')}));
+sideBets.forEach(bet => bet.addEventListener('click', () =>{
+  !payBox.classList.contains('active') && bet.classList.toggle('active');
+}));
 
 async function dealHand() {
   resetHand();
@@ -436,8 +438,7 @@ function payBets() {
 
 function createPayBox(name) {
   if (payBox.classList.contains('active')) {
-    alertMessage.replaceChild(document.createTextNode('Pay current bet before moving to the next one.'), alertMessage.childNodes[0]);
-    alertBox.classList.add('active');
+    alert('Pay current bet before moving to the next one.');
     return;
   }
   bet = document.getElementById(name);
